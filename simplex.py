@@ -28,18 +28,3 @@ def resolver_problema_asignacion(cost_matrix, supply, demand):
     costo_total = pulp.value(lp_problem.objective)
     
     return estado, asignaciones, costo_total
-
-# Datos de entrada
-cost_matrix = np.array([[5, 2, 7, 3],
-                        [3, 6, 6, 1],
-                        [6, 1, 2, 4],
-                        [4, 3, 6, 6]])
-
-supply = np.array([80, 30, 60, 45])
-demand = np.array([70, 40, 70, 35])
-
-# Llamar a la función y obtener resultados
-estado, asignaciones, costo_total = resolver_problema_asignacion(cost_matrix, supply, demand)
-
-print("Estado:", estado)
-print("Asignaciones:", asignaciones)

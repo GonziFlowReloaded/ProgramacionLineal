@@ -31,8 +31,3 @@ def generar_grafico_asignaciones_ordenado_lado_a_lado(asignaciones):
     
     plt.title("Grafo de Asignaciones")
     plt.show()
-
-
-asignaciones_ejemplo = [(1, 2, 40.0), (1, 3, 10.0), (1, 4, 30.0), (2, 1, 25.0), (2, 4, 5.0), (3, 3, 60.0), (4, 1, 45.0)]
-
-generar_grafico_asignaciones_ordenado_lado_a_lado(asignaciones_ejemplo)
