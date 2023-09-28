@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Barras de Ventas Mensuales</title>
+    <style>
+        /* Estilos CSS para las barras */
+        .bar {
+            fill: steelblue;
+        }
+        .bar:hover {
+            fill: orange;
+        }
+        .axis-label {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <svg width="500" height="300"></svg>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // Datos de ejemplo (ventas mensuales)
+        const datosVentas = [
+            { mes: 'Enero', ventas: 1200 },
+            { mes: 'Febrero', ventas: 1500 },
+            { mes: 'Marzo', ventas: 900 },
+            { mes: 'Abril', ventas: 1800 },
+            { mes: 'Mayo', ventas: 1300 },
+            { mes: 'Junio', ventas: 1600 }
+        ];
+
+        // Tamaño del gráfico
+        const width = 500;
+        const height = 300;
+
+        // Crear el elemento SVG
+        const svg = d3.select('svg');
+
+        // Escala para el eje X (meses)
+        const xScale = d3.scaleBand()
+            .domain(datosVentas.map(d => d.mes))
+            .range([0, width])
+            .padding(0.1);
+
+        // Escala para el eje Y (ventas)
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(datosVentas, d => d.ventas)])
+            .range([height, 0]);
+
+        // Crear las barras
+        svg.selectAll('.bar')
+            .data(datosVentas)
+            .enter().append('rect')
+            .attr('class', 'bar')
+            .attr('x', d => xScale(d.mes))
+            .attr('y', d => yScale(d.ventas))
+            .attr('width', xScale.bandwidth())
+            .attr('height', d => height - yScale(d.ventas));
+
+        // Agregar etiquetas de los ejes
+        svg.selectAll('.x-axis-label')
+            .data(datosVentas)
+            .enter().append('text')
+            .attr('class', 'axis-label')
+            .attr('x', d => xScale(d.mes) + xScale.bandwidth() / 2)
+            .attr('y', height + 20)
+            .attr('text-anchor', 'middle')
+            .text(d => d.mes);
+
+        svg.append('text')
+            .attr('class', 'axis-label')
+            .attr('x', -height / 2)
+            .attr('y', -50)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .text('Ventas');
+
+        // Mostrar el gráfico
+        svg.attr('width', width)
+            .attr('height', height);
+    </script>
+</body>
+</html>
