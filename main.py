@@ -6,12 +6,14 @@ from voguel import vogel
 import numpy as np
 
 
-cost_matrix = np.array([[1.9, 1.8, 2.5, 2, 3, 5.5],
-                        [3.5, 3.7, 2.4, 2.5, 1.9, 5.7]
+cost_matrix = np.array([[5,2,7,3],
+                        [3,6,6,1],
+                        [6,1,2,4],
+                        [4,3,6,6],
                         ])
 
-supply = np.array([2000, 1000])
-demand = np.array([450,600,350,500,700,400])
+supply = np.array([80,30,60,45])
+demand = np.array([70,40,70,35])
 
 estado, asignaciones, costo_total = resolver_problema_asignacion(cost_matrix, supply, demand)
 print('Simplex')
@@ -38,11 +40,11 @@ print(f"Costo Total: {costo_total}")
 
 print("-"*60)
 
-estado, asignaciones, costo_total = vogel(cost_matrix, supply, demand)
+estado = vogel(cost_matrix, supply, demand)
 print('Vogel')
-print(f"Estado: {estado}")
+print(f"Costo Total: {estado}")
 # print(f"Asignaciones: {asignaciones}")
-print(f"Costo Total: {costo_total}")
+
 
 
 # generar_grafico_asignaciones_ordenado_lado_a_lado(asignaciones)
